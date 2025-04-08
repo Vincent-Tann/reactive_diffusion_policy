@@ -45,13 +45,16 @@
 ## TODO
 - [x] Release the code of TactAR and [Quest3 APP](https://github.com/xiaoxiaoxh/TactAR_APP).
 - [x] Release the code of RDP.
-- [x] Release the data.
-- [x] Release the checkpoints.
-- [ ] Add guide for customized tactile/force sensors, robots and tasks. (ETA: April 8th)
+- [x] Release the [data](https://huggingface.co/datasets/WendiChen/reactive_diffusion_policy_dataset).
+- [x] Release the [checkpoints](https://huggingface.co/WendiChen/reactive_diffusion_policy_model).
+- [x] Add [guide for customized tasks, tactile / force sensors and robots](docs/customized_deployment_guide.md).
 - [ ] Add guide for collecting the tactile dataset. (ETA: April 8th)
 - [ ] Support more robots (e.g. Franka).
 
 ## ⚙️ Environment Setup
+### 📝 Use Customized Tactile / Force Sensors and Robots
+Please refer to [docs/customized_deployment_guide.md](docs/customized_deployment_guide.md).
+
 ### Hardware
 #### Device List
 - Meta Quest 3 VR headset.
@@ -72,6 +75,7 @@
 #### Quest 3 Setup
 Build and install the TactAR APP on the Quest 3 according to
 the [README in our Unity Repo](https://github.com/xiaoxiaoxh/TactAR_APP).
+> You can also adopt other Teleoperation system with force feedback.
 
 #### Workstation Setup
 1. Follow the [official document](https://docs.ros.org/en/humble/Installation/Ubuntu-Install-Debs.html)
@@ -93,7 +97,7 @@ to install ROS2 Humble.
 1. For the workstation,
 the environment and the task have to be configured first and
 then start several services for teleoperating robots, publishing sensor data and record the data.
-    1. Environment and Task configuration.
+    1. Environment and Task Configuration.
         - **Calibration.**
           Example calibration files are proviced in [data/calibration](data/calibration).
           Each `A_to_B_transform.json` contains the transformation from coordinate system A to coordinate system B. 
@@ -105,6 +109,7 @@ then start several services for teleoperating robots, publishing sensor data and
           Create task config file which assigns the camera and sensor to use.
           You can take [reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml](reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml)
           as an example.
+          Refer to [docs/customized_deployment_guide.md](docs/customized_deployment_guide.md) for more details.
    2. Start services. Run each command in a separate terminal.
       You can use tmux to split the terminal.
       ```bash
@@ -165,6 +170,7 @@ After postprocessing, you may see the following structure:
    In addition to the task config file used in [data collection](#data-collection),
    another file is needed to configure dataset, runner, and model-related parameters such as `obs` and `action`.
    You can take [reactive_diffusion_policy/config/task/real_peel_image_dp_absolute_12fps.yaml](reactive_diffusion_policy/config/task/real_peel_image_dp_absolute_12fps.yaml) as an example.
+   Refer to [docs/customized_deployment_guide.md](docs/customized_deployment_guide.md) for more details.
    > The `dp`, `at` and `ldp` in the config file name indicate the Diffusion policy, Asymmetric Tokenizer and Latent Diffusion Policy.
 2. **Generate Dataset with Correct Frequency.**
    The `fps` at the end of config file name indicates the control frequency.

@@ -1,7 +1,7 @@
 ## Customized Deployment Guide
 
 ### Add Customized Tasks
-There are two kinds of tasks configs: **shared configs** and **policy-related configs**.
+There are two kinds of task configs: **shared configs** and **policy-related configs**.
 #### Shared Configs
 Shared configs define the robot's degrees of freedom and gripper parameters, as well as the sensors used and their parameters.
 You can take [reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml](../reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml)

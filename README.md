@@ -48,7 +48,7 @@
 - [x] Release the [data](https://huggingface.co/datasets/WendiChen/reactive_diffusion_policy_dataset).
 - [x] Release the [checkpoints](https://huggingface.co/WendiChen/reactive_diffusion_policy_model).
 - [x] Add [guide for customized tasks, tactile / force sensors and robots](docs/customized_deployment_guide.md).
-- [ ] Add guide for collecting the tactile dataset. (ETA: April 8th)
+- [x] Add [guide for creating the tactile dataset and the tactile embedding](docs/tactile_embedding_guide.md).
 - [ ] Support more robots (e.g. Franka).
 
 ## ⚙️ Environment Setup
@@ -129,6 +129,9 @@ Please refer to [docs/data_collection_tips.md](docs/data_collection_tips.md).
 
 ### Example Data
 We provide the data we collected on [![data](https://img.shields.io/badge/data-FFD21E?logo=huggingface&logoColor=000)](https://huggingface.co/datasets/WendiChen/reactive_diffusion_policy_dataset).
+
+### Generate your own tactile embedding
+Please refer to the [tactile embedding guide](docs/tactile_embedding_guide.md) for collecting your own tactile dataset and generate tactile embedding based on this dataset. You can also directly use our pre-calculated PCA transformation matrix for tactile embedding in [data/PCA_Transform_GelSight](data/PCA_Transform_GelSight).
 
 ### Data Postprocessing
 Change the config in [post_process_data.py](post_process_data.py)
@@ -213,7 +216,7 @@ After postprocessing, you may see the following structure:
 We provide the checkpoints in our experiments
 on [![checkpoints](https://img.shields.io/badge/checkpoints-FFD21E?logo=huggingface&logoColor=000)](https://huggingface.co/WendiChen/reactive_diffusion_policy_model).
 
-## Q&A
+## ❔ Q&A
 Please refer to [docs/Q&A.md](docs/Q&A.md).
 
 ## 🙏 Acknowledgement

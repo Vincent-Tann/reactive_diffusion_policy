@@ -47,7 +47,7 @@
 - [x] Release the code of RDP.
 - [x] Release the data.
 - [x] Release the checkpoints.
-- [ ] Add guide for customized tactile/force sensors and customized tasks. (ETA: April 8th)
+- [ ] Add guide for customized tactile/force sensors, robots and tasks. (ETA: April 8th)
 - [ ] Add guide for collecting the tactile dataset. (ETA: April 8th)
 - [ ] Support more robots (e.g. Franka).
 

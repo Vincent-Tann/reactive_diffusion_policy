@@ -367,9 +367,6 @@ class TeleopServer:
                     else:
                         raise ValueError(f"Unsupported teleoperation mode: {self.teleop_mode}")
 
-                    # clip z to avoid collision with table
-                    left_target[2] = np.clip(left_target[2], 0.02, np.inf)
-
                     if np.linalg.norm(left_target[:3] - left_tcp[:3]) > threshold:
                         if self.left_tracking_state:
                             logger.info("left robot lost sync")
@@ -399,9 +396,6 @@ class TeleopServer:
                                                  @ pose_6d_to_4x4matrix(right_target_6d_in_world)))
                     else:
                         raise ValueError(f"Unsupported teleoperation mode: {self.teleop_mode}")
-
-                    # clip z to avoid collision with table
-                    right_target[2] = np.clip(right_target[2], 0.02, np.inf)
 
                     if np.linalg.norm(right_target[:3] - right_tcp[:3]) > threshold:
                         if self.right_tracking_state:

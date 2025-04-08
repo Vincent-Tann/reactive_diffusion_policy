@@ -7,7 +7,7 @@ Shared configs define the robot's degrees of freedom and gripper parameters, as 
 You can take [reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml](../reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml)
 as an example.
 
-Note that the `teleop_mode` represents the degrees of freedom of the robot.
+Note that the `teleop_mode` represents the degrees of freedom of the robot action.
 You can add new mode in [reactive_diffusion_policy/common/data_models.py](../reactive_diffusion_policy/common/data_models.py) and
 modify [reactive_diffusion_policy/real_world/teleoperation/teleop_server.py](../reactive_diffusion_policy/real_world/teleoperation/teleop_server.py) accordingly.
 
@@ -24,13 +24,14 @@ modify [post_process_data.py](post_process_data.py) and [reactive_diffusion_poli
    Refer to [reactive_diffusion_policy/real_world/publisher/gelsight_camera_publisher.py](../reactive_diffusion_policy/real_world/publisher/gelsight_camera_publisher.py)
    and implement a similar publisher for your sensor.
    This publisher will publish the image, markers or wrench of the sensor to the ROS topic.
-   > Because Flexiv Rizon 4 is equipped with built-in wrench sensors, we have implemented the publisher in
+   > Because Flexiv Rizon 4 is equipped with built-in joint torque sensors, we have implemented the publisher in
      [reactive_diffusion_policy/real_world/publisher/bimanual_robot_publisher.py](../reactive_diffusion_policy/real_world/publisher/bimanual_robot_publisher.py).
      If you want to use a separate force sensor, you can add an individual force sensor publisher.
 2. **Modify the Device Mapping Server.**
-   Add the sensor to [reactive_diffusion_policy/real_world/device_mapping/device_mapping_server.py](../reactive_diffusion_policy/real_world/device_mapping/device_mapping_server.py).
-   It provides the mapping from the sensor to the ROS topic name,
-   which is requested by the Data Recorder and Real Runner.
+   Our experiments use many different settings of sensor hardwares, and these sensors may not work correctly, so we use `Device Mapping Server` as an online database for other processes to query the current hardware settings.
+   It provides the mapping from the sensor to the ROS2 topic name,
+   which is requested by the `Data Recorder` and `Real Runner`. Please add the new sensor mapping in [reactive_diffusion_policy/real_world/device_mapping/device_mapping_server.py](../reactive_diffusion_policy/real_world/device_mapping/device_mapping_server.py).
+    
 3. **Modify Services.**
    Modify the following services to be compatible with the new sensors:
    - Data Recorder: [reactive_diffusion_policy/real_world/teleoperation/data_recorder.py](../reactive_diffusion_policy/real_world/teleoperation/data_recorder.py)

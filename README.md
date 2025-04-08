@@ -52,7 +52,7 @@
 - [ ] Support more robots (e.g. Franka).
 
 ## ⚙️ Environment Setup
-### 📝 Use Customized Tactile / Force Sensors and Robots
+### 📝 Use Customized Tactile / Force Sensors, Robots and Customized Tasks
 Please refer to [docs/customized_deployment_guide.md](docs/customized_deployment_guide.md).
 
 ### Hardware

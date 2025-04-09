@@ -49,7 +49,7 @@
 - [x] Release the [checkpoints](https://huggingface.co/WendiChen/reactive_diffusion_policy_model).
 - [x] Add [guide for customized tasks, tactile / force sensors and robots](docs/customized_deployment_guide.md).
 - [x] Add [guide for creating the tactile dataset and the tactile embedding](docs/tactile_embedding_guide.md).
-- [ ] Support more robots (e.g. Franka).
+- [ ] Support more robots (e.g. Franka) (ETA: early May).
 
 ## ⚙️ Environment Setup
 ### 📝 Use Customized Tactile / Force Sensors, Robots and Customized Tasks

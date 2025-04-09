@@ -1,5 +1,5 @@
 defaults:
-  - task: real_pusht_image
+  - task: real_peel_image_dp_absolute_12fps
   - _self_
 
 name: train_diffusion_unet_image

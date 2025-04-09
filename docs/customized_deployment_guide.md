@@ -3,20 +3,20 @@
 ### Add Customized Tasks
 There are two kinds of task configs: **shared configs** and **policy-related configs**.
 #### Shared Configs
-Shared configs define the robot's degrees of freedom and gripper parameters, as well as the sensors used and their parameters.
+Shared configs define the action DoFs and gripper parameters, as well as the sensor parameters of a specific task. This config will also be used for teleoperation in TactAR.
 You can take [reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml](../reactive_diffusion_policy/config/task/real_peel_two_realsense_one_gelsight_one_mctac_24fps.yaml)
 as an example.
 
-Note that the `teleop_mode` represents the degrees of freedom of the robot action.
-You can add new mode in [reactive_diffusion_policy/common/data_models.py](../reactive_diffusion_policy/common/data_models.py) and
+Note that the `teleop_mode` represents the degrees of freedom of the robot action in teleoperation, so you can freeeze some action dimensions by changing the `teleop_mode`.
+You can add a new teleoperation mode in [reactive_diffusion_policy/common/data_models.py](../reactive_diffusion_policy/common/data_models.py) and
 modify [reactive_diffusion_policy/real_world/teleoperation/teleop_server.py](../reactive_diffusion_policy/real_world/teleoperation/teleop_server.py) accordingly.
 
 #### Policy-related Configs
-Policy-related configs define the obs and action shape, env runner parameters, and dataset parameters.
+Policy-related configs define the observation shape, action shape, environment runner parameters, and dataset parameters.
 
-Note that the `mode` in `data_processing_params` represents the sensor mode.
+Note that the `mode` in `data_processing_params` represents the `SENSOR_MODE`, which defines how much cameras or tactile sensors are used for observation.
 Make sure the `mode` in the task config matches the `SENSOR_MODE` in [post_process_data.py](post_process_data.py).
-You can add new mode in [reactive_diffusion_policy/common/data_models.py](../reactive_diffusion_policy/common/data_models.py) and
+You can add a new sensor mode in [reactive_diffusion_policy/common/data_models.py](../reactive_diffusion_policy/common/data_models.py) and
 modify [post_process_data.py](post_process_data.py) and [reactive_diffusion_policy/real_world/post_process_utils.py](../reactive_diffusion_policy/real_world/post_process_utils.py) accordingly.
 
 ### Add Customized Tactile / Force Sensors

@@ -5,7 +5,7 @@
     Slow-Fast Visual-Tactile Policy Learning for Contact-Rich Manipulation
 </h4>
 <h4 align="center">
-    In Submission
+    RSS 2025
 </h4>
 
 <p align="center">

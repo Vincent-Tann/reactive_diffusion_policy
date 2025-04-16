@@ -17,12 +17,14 @@
     Yuan Fang<sup>1†</sup>,
     <a href="https://softrobotics.sjtu.edu.cn">Guoying Gu</a>,
     <a href="http://hxu.rocks">Huazhe Xu</a><sup>234‡</sup>,
-    <a href="https://www.mvig.org">Cewu Lu</a><sup>1‡</sup>
+    <a href="https://www.mvig.org">Cewu Lu</a><sup>15‡</sup>
     <br>
     <sup>1</sup>Shanghai Jiao Tong University
     <sup>2</sup>Tsinghua University, IIIS
     <sup>3</sup>Shanghai Qi Zhi Institute
+    <br>
     <sup>4</sup>Shanghai AI Lab
+    <sup>5</sup>Shanghai Innovation Institute
     <br>
     <sup>*</sup>Equal contribution
     <sup>†</sup>Equal contribution

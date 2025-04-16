@@ -12,6 +12,12 @@ fuse.cfg
 
 *.ai
 
+*.hdf5
+
+robosuite_dataset/
+
+reactive_diffusion_policy_dataset/
+
 # Generation results
 results/
 

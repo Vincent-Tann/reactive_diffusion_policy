@@ -114,6 +114,8 @@ if __name__ == '__main__':
     total_count = 0
     # find all the files in the data directory
     data_files = sorted([f for f in os.listdir(data_dir) if f.endswith('.pkl')])
+    
+    # iterate over all the data files (all demos)
     for seq_idx, data_file in enumerate(data_files):
         if DEBUG and seq_idx <= 58:
             continue
@@ -192,6 +194,7 @@ if __name__ == '__main__':
 
             del sensor_msg, obs_dict
 
+        # log the step count for each episode, easier for future separation.
         episode_ends_arrays.append(total_count)
 
     # Convert lists to arrays

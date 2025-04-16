@@ -10,15 +10,15 @@ LOGGING_MODE="online"
 TIMESTAMP=$(date +%m%d%H%M%S)
 SEARCH_PATH="./data/outputs"
 
-# # Stage 1: Train Asymmetric Tokenizer
-# echo "Stage 1: training Asymmetric Tokenizer..."
-# CUDA_VISIBLE_DEVICES=${GPU_ID} python train.py \
-#     --config-name=train_at_workspace \
-#     task=real_${TASK_NAME}_image_gelsight_emb_at_24fps \
-#     task.dataset_path=${DATASET_PATH} \
-#     task.name=real_${TASK_NAME}_image_gelsight_emb_at_24fps_${TIMESTAMP} \
-#     at=at_peel \
-#     logging.mode=${LOGGING_MODE}
+# Stage 1: Train Asymmetric Tokenizer
+echo "Stage 1: training Asymmetric Tokenizer..."
+CUDA_VISIBLE_DEVICES=${GPU_ID} python train.py \
+    --config-name=train_at_workspace \
+    task=real_${TASK_NAME}_image_gelsight_emb_at_24fps \
+    task.dataset_path=${DATASET_PATH} \
+    task.name=real_${TASK_NAME}_image_gelsight_emb_at_24fps_${TIMESTAMP} \
+    at=at_peel \
+    logging.mode=${LOGGING_MODE}
 
 # find the latest checkpoint
 echo ""

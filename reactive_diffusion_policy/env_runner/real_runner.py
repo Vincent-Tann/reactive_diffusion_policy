@@ -549,7 +549,6 @@ class RealRunner:
                             self.tcp_ensemble_buffer.add_action(tcp_action, step_count)
 
                             if self.env.enable_exp_recording and not self.use_latent_action_with_rnn_decoder:
-                                print("123")
                                 self.env.get_predicted_action(tcp_action, type='full_tcp')
 
                         if step_count % self.gripper_action_update_interval == 0:

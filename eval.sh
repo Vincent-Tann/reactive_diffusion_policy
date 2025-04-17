@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # DP w. GelSight Emb. (Peeling)
 #python eval_real_robot_flexiv.py \
 #      --config-name train_diffusion_unet_real_image_workspace \

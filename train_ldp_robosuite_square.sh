@@ -3,8 +3,7 @@
 GPU_ID=0
 
 TASK_NAME="peel"
-# DATASET_PATH="/home/wendi/Desktop/record_data/peel_v3_downsample1_zarr"
-DATASET_PATH="/home/txs/Code/tactile/reactive_diffusion_policy/reactive_diffusion_policy_dataset/dataset_mini/peel_v3_downsample1_zarr"
+DATASET_PATH="/home/txs/Code/tactile/reactive_diffusion_policy/robosuite_dataset/square_zarr"
 LOGGING_MODE="online"
 
 TIMESTAMP=$(date +%m%d%H%M%S)

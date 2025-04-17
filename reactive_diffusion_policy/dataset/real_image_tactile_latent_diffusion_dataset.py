@@ -26,6 +26,13 @@ class RealImageTactileLatentDiffusionDataset(RealImageTactileDataset):
             latent_action = self.at.encoder(
                 self.at.preprocess(action / self.at.act_scale)
             )
+            # action = data['action'].to(self.at.device).unsqueeze(0)
+            # action = normalizer['action'].normalize(action)
+            # processed_action = self.at.preprocess(action / self.at.act_scale)
+            # import pdb; pdb.set_trace()
+            # latent_action = self.at.encoder(processed_action)
+            
+            
             if self.at.use_vq:
                 if not self.use_latent_action_before_vq:
                     latent_action, _, _ = self.at.quant_state_with_vq(latent_action)

@@ -67,6 +67,7 @@ class EncoderCNN(nn.Module):
         self.apply(weights_init_encoder)
 
     def forward(self, x, flatten=False):
+        # import pdb; pdb.set_trace()
         x = einops.rearrange(x, "N (T A) -> N T A", A=self.action_dim)
         x = einops.rearrange(x, "N T A -> N A T")
         h = self.encoder(x)

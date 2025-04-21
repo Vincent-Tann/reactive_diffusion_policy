@@ -181,6 +181,7 @@ class LatentDiffusionUnetImagePolicy(DiffusionUnetImagePolicy):
 
         latent_action = latent_action.to(self.device)
         if self.at.use_rnn_decoder:
+            # decode latent action to action with RNN decoder (in at model)
             if extend_obs_pad_after:
                 extend_obs_pad_after_n = self.original_horizon - extended_obs_last_step
             else:
@@ -193,6 +194,7 @@ class LatentDiffusionUnetImagePolicy(DiffusionUnetImagePolicy):
         else:
             nsample = self.at.get_action_from_latent(latent_action)
 
+        # unnormalize action
         naction_pred = nsample[..., :Da]
         action_pred = self.normalizer['action'].unnormalize(naction_pred)
 

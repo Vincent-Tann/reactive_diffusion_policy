@@ -641,7 +641,7 @@ class SimRunner:
                                     raise NotImplementedError
                             # Add to ensemble buffer
                             logger.debug(f"step_count: {step_count}, Add TCP action to ensemble buffer, shape: {tcp_action.shape}, self.action_step_count: {self.action_step_count}")
-                            # self.tcp_ensemble_buffer.add_action(tcp_action, step_count)
+                            self.tcp_ensemble_buffer.add_action(tcp_action, step_count)
                             # logger.debug(f"self.action_step_count: {self.action_step_count}")
                             self.tcp_ensemble_buffer.add_action(tcp_action, self.action_step_count)
                             
@@ -664,8 +664,8 @@ class SimRunner:
                             
                             # Add to ensemble buffer
                             logger.debug(f"step_count: {step_count}, Add gripper action to ensemble buffer, shape: {gripper_action.shape}, self.action_step_count: {self.action_step_count}")
-                            # self.gripper_ensemble_buffer.add_action(gripper_action, step_count)
-                            self.gripper_ensemble_buffer.add_action(gripper_action, self.action_step_count)
+                            self.gripper_ensemble_buffer.add_action(gripper_action, step_count)
+                            # self.gripper_ensemble_buffer.add_action(gripper_action, self.action_step_count)
                         
                         # Record frame if video recording is enabled
                         if self.enable_video_recording:

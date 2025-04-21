@@ -68,6 +68,7 @@ class EnsembleBuffer:
                 # print out the var values
                 print(f"i: {i}, idx: {idx}, horizon: {horizon}, idx + horizon - 1: {idx + horizon - 1}, len(self.actions): {len(self.actions)}")
                 print(f"timestep: {timestep}, action.shape: {action.shape}, self.timestep: {self.timestep}, self.actions_start_timestep: {self.actions_start_timestep}")
+                raise Exception("Error adding action to ensemble buffer.")
                 
     def get_action(self):
         """

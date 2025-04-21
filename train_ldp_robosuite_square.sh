@@ -32,7 +32,7 @@ echo "Stage 2: training Latent Diffusion Policy..."
 CUDA_VISIBLE_DEVICES=${GPU_ID} accelerate launch train.py \
     --config-name=train_latent_diffusion_unet_real_image_workspace \
     task=robosuite_square_image_wrench_ldp \
-    task.dataset_path=${DATASET_PATH} \
+    task.dataset_zarr_path=${DATASET_PATH} \
     task.name=robosuite_square_image_wrench_ldp_${TIMESTAMP} \
     at=at_square \
     at_load_dir=${AT_LOAD_DIR} \

@@ -48,37 +48,54 @@ class EnsembleBuffer:
         - timestep: action[0]'s timestep.
         """
         action = np.array(action)
-        if self.action_shape == None:
+        if self.action_shape == None: # first action received, set action shape
             self.action_shape = action.shape[1:]
             assert len(self.action_shape) == 1, "Only support action with 1D shape."
         else:
             assert self.action_shape == action.shape[1:], "Incompatible action shape."
+        # idx: index of the first action of "action" in self.actions and self.actions_timestep.
         idx = timestep - self.actions_start_timestep
-        horizon = action.shape[0]
+        horizon = action.shape[0] # horizon of the action chunk.
         while idx + horizon - 1 >= len(self.actions):
             self.actions.append([])
             self.actions_timestep.append([])
         for i in range(idx, idx + horizon):
-            self.actions[i].append(action[i - idx, ...])
-            self.actions_timestep[i].append(timestep)
-    
+            try:
+                self.actions[i].append(action[i - idx, ...])
+                self.actions_timestep[i].append(timestep)
+            except:
+                # import pdb; pdb.set_trace()
+                # print out the var values
+                print(f"i: {i}, idx: {idx}, horizon: {horizon}, idx + horizon - 1: {idx + horizon - 1}, len(self.actions): {len(self.actions)}")
+                print(f"timestep: {timestep}, action.shape: {action.shape}, self.timestep: {self.timestep}, self.actions_start_timestep: {self.actions_start_timestep}")
+                
     def get_action(self):
         """
         Get ensembled action from buffer.
         """
         if self.timestep - self.actions_start_timestep >= len(self.actions):
+            print(f"get_action return None: self.timestep: {self.timestep}, self.actions_start_timestep: {self.actions_start_timestep}, self.timestep - self.actions_start_timestep: {self.timestep - self.actions_start_timestep}, len(self.actions): {len(self.actions)}")
             return None      # no data
-        while self.actions_start_timestep < self.timestep:
+        while self.actions_start_timestep < self.timestep - 1:
             self.actions.popleft()
             self.actions_timestep.popleft()
             self.actions_start_timestep += 1
         actions = self.actions[0]
         actions_timestep = self.actions_timestep[0]
         if actions == []:
+            print(f"get_action return None: self.timestep: {self.timestep}, self.actions_start_timestep: {self.actions_start_timestep}, self.timestep - self.actions_start_timestep: {self.timestep - self.actions_start_timestep}, len(self.actions): {len(self.actions)}")
             return None      # no data
-        sorted_actions = sorted(zip(actions_timestep, actions))
-        all_actions = np.array([x for _, x in sorted_actions])
-        all_timesteps = np.array([t for t, _ in sorted_actions])
+        
+        # sorted_actions = sorted(zip(actions_timestep, actions))
+        # all_actions = np.array([x for _, x in sorted_actions])
+        # all_timesteps = np.array([t for t, _ in sorted_actions])
+        
+        # Sort by timestep only, not by action values
+        # This avoids comparing numpy arrays directly
+        timestep_indices = np.argsort(actions_timestep)
+        all_actions = np.array([actions[i] for i in timestep_indices])
+        all_timesteps = np.array([actions_timestep[i] for i in timestep_indices])
+        
         if self.mode == "new":
             action = all_actions[-1]
         elif self.mode == "old":

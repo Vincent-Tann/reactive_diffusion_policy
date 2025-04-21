@@ -305,8 +305,10 @@ class RealRunner:
                 continue
 
             if self.use_latent_action_with_rnn_decoder:
+                # seems that the last element of tcp_step_action is the number of steps of something.
                 tcp_extended_obs_step = int(tcp_step_action[-1])
                 gripper_extended_obs_step = int(gripper_step_action[-1])
+                # get rid of the last element
                 tcp_step_action = tcp_step_action[:-1]
                 gripper_step_action = gripper_step_action[:-1]
 
@@ -319,8 +321,10 @@ class RealRunner:
                     action_dim = self.shape_meta['obs']['left_robot_tcp_pose']['shape'][0]
                     if 'right_robot_tcp_pose' in self.shape_meta['obs']:
                         action_dim += self.shape_meta['obs']['right_robot_tcp_pose']['shape'][0]
+                    # the last action_dim is the base absolute action; the rest is the latent action.
                     tcp_base_absolute_action = tcp_step_action[-action_dim:]
                     gripper_base_absolute_action = gripper_step_action[-action_dim:]
+                    # get rid of the base absolute action from tcp_step_action
                     tcp_step_action = tcp_step_action[:-action_dim]
                     gripper_step_action = gripper_step_action[:-action_dim]
 
@@ -337,6 +341,7 @@ class RealRunner:
                 tcp_step_action = policy.predict_from_latent_action(tcp_step_latent_action, extended_obs_dict, tcp_extended_obs_step, dataset_obs_temporal_downsample_ratio)['action'][0].detach().cpu().numpy()
                 gripper_step_action = policy.predict_from_latent_action(gripper_step_latent_action, extended_obs_dict, gripper_extended_obs_step, dataset_obs_temporal_downsample_ratio)['action'][0].detach().cpu().numpy()
                 if self.use_relative_action:
+                    # turn relative action back to absolute action
                     tcp_step_action = relative_actions_to_absolute_actions(tcp_step_action, tcp_base_absolute_action)
                     gripper_step_action = relative_actions_to_absolute_actions(gripper_step_action, gripper_base_absolute_action)
 
@@ -513,7 +518,8 @@ class RealRunner:
                             # add action step to get corresponding observation
                             action_all = np.concatenate([
                                 action_all,
-                                np.arange(self.n_obs_steps * self.dataset_obs_temporal_downsample_ratio, action_all.shape[0] + self.n_obs_steps * self.dataset_obs_temporal_downsample_ratio)[:, np.newaxis]
+                                np.arange(self.n_obs_steps * self.dataset_obs_temporal_downsample_ratio, 
+                                        action_all.shape[0] + self.n_obs_steps * self.dataset_obs_temporal_downsample_ratio)[:, np.newaxis]
                             ], axis=-1)
                         else:
                             if self.use_relative_action:
@@ -522,7 +528,7 @@ class RealRunner:
                                     np_absolute_obs_dict['right_robot_tcp_pose'][-1] if 'right_robot_tcp_pose' in np_absolute_obs_dict else np.array([])
                                 ], axis=-1)
                                 action_all = relative_actions_to_absolute_actions(action_all, base_absolute_action)
-
+                        
                         if self.action_interpolation_ratio > 1:
                             if self.use_latent_action_with_rnn_decoder:
                                 action_all = action_all.repeat(self.action_interpolation_ratio, axis=0)
